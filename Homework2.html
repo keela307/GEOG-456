@@ -1,0 +1,45 @@
+ <title>Homework 2</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        <script src="./park.js" ></script>
+    </head>
+    <body>
+    <div id="mapid"></div>
+    
+    <style>
+        #mapid{ position: relative;
+            width: 1500px; height: 700px; }
+    </style>
+    <script>  
+   
+    var map = L.map('mapid').setView([28.47212494473434, -81.47381444947317], 10);
+  
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+  
+    var uncIcon = L.icon({   
+        iconUrl: 'https://www.nicepng.com/png/full/127-1273670_harry-potter-castle-transparent.png',   
+      
+        iconSize: [50,50], 
+        popupAnchor: [0,0] 
+        });
+ 
+        var customPopup = "Hogwarts School in Universal Studios, Orlando Fl is a fantasy school for wizards brought to life. This is one of my favorite places ever...though the ride inside is nauseating.<br/><img src=https://cdn.getawaytoday.com/api/content/image/H3E8M076JN2RG59B/top-things-to-do-at-the-wizarding-world-of-harry-potter-harry-potter-and-the-forbidden-journey-list.jpg'format=2500w' width='500px'/>";
+  
+
+    L.geoJSON(park, {  
+    pointToLayer: function (feature, latlng) { 
+    return L.marker(latlng, {icon: uncIcon});}}) 
+    .bindPopup(customPopup)
+    .addTo(map); 
+    
+    </script>
+    </body>
+</html>
