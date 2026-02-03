@@ -1,0 +1,45 @@
+<title>Assessment 2</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        <script src="./Kristy.js" ></script>
+    </head>
+    <body>
+    <div id="mapid"></div>
+    
+    <style>
+        #mapid{ position: relative;
+            width: 1500px; height: 700px; }
+    </style>
+    <script>  
+   
+    var map = L.map('mapid').setView([20.685115300487453, -123.0072102676203], 5);
+  
+
+    L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://viewfinderpanoramas.org">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+  
+    var uncIcon = L.icon({   
+        iconUrl: 'https://pngimg.com/d/hurricane_PNG10.png',   
+      
+        iconSize: [25,25], 
+        popupAnchor: [0,0] 
+        });
+ 
+        var customPopup = "Hurricane Kristy<br/><img src=https://bloximages.newyork1.vip.townnews.com/kitv.com/content/tncms/assets/v3/editorial/7/40/74075600-908e-11ef-ae88-1787f1544ed8/67181bc709101.image.jpg?resize=1396%2C866'format=300w' width='300px'/>";
+  
+
+    L.geoJSON(Kristy, {  
+    pointToLayer: function (feature, latlng) { 
+    return L.marker(latlng, {icon: uncIcon});}}) 
+    .bindPopup(customPopup)
+    .addTo(map); 
+    
+    </script>
+    </body>
+</html>
