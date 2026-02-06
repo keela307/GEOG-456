@@ -61,11 +61,11 @@ var Panorama = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
         }).addTo(map); 
 
         function getCentersCategory(POPULATION) {
-            return (POPULATION >= 650) ? "High Patient Intake" :
-            (POPULATION >= 300) ? "Average Patient Intake" :
-            (POPULATION >= 150) ? "Below Average Patient Intake" :
-            (POPULATION >= 0) ? "Poor Patient Intake" :
-            "Negative Patient Intake";
+            return (POPULATION >= 650) ? "Trauma Care center has a HIGH patient intake at time of recording" :
+            (POPULATION >= 300) ? "Trauma Care center has an AVERAGE patient intake at time of recording" :
+            (POPULATION >= 150) ? "Trauma Care center has a BELOW AVERAGE patient intake at time of recording" :
+            (POPULATION >= 0) ? "Trauma Care center has a POOR patient intake at time of recording" :
+            "Trauma Care center has a NEGTIVE patient intake at time of recording";
         }
 
           function getCentersColor(POPULATION) {
