@@ -1,0 +1,100 @@
+<title>Homework 3</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        <script src="./Centers.js" ></script>
+    </head>
+    <body>
+    <div id="mapid"></div>
+    
+    <style>
+        #mapid{ position: relative;
+            width: 1500px; height: 700px; }
+    </style>
+    <script>  
+   
+    var map = L.map('mapid').setView([25.337043041420632, -81.30576927067591], 9);
+  
+
+ var OSM = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+var Panorama = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://viewfinderpanoramas.org">OpenStreetMap</a> contributors'
+        });
+
+  
+    var uncIcon = L.icon({   
+        iconUrl: 'https://png.pngtree.com/png-vector/20240119/ourmid/pngtree-city-hospital-elements-png-image_11420665.png',   
+      
+        iconSize: [40,40], 
+        popupAnchor: [0,0] 
+        });
+ 
+        var customPopup = "Hurricane Kristy<br/><img src=https://bloximages.newyork1.vip.townnews.com/kitv.com/content/tncms/assets/v3/editorial/7/40/74075600-908e-11ef-ae88-1787f1544ed8/67181bc709101.image.jpg?resize=1396%2C866'format=300w' width='300px'/>";
+            var n = 0;
+
+  let size = 20
+    function circleIcon (size){
+        var geojsonMarkerOptions = {
+        radius: size/10,
+        fillColor: getCentersColor(size),//"#ff7800",
+        color: "#000",
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+        };
+        return geojsonMarkerOptions;
+    }
+
+  var Centers = L.geoJSON(Centers, {
+    pointToLayer: function (feature, latlng) {
+        // console.log('loop: ' + n +' intesity = '+feature.properties.INTENSITY)
+        // n = n + 1
+        var size = feature.properties.POPULATION
+        return L.circleMarker(latlng, circleIcon(size)).bindPopup(getCentersCategory(feature.properties.POPULATION));
+    }
+        }).addTo(map); 
+
+        function getCentersCategory(POPULATION) {
+            return (POPULATION >= 650) ? "High Patient Intake" :
+            (POPULATION >= 300) ? "Average Patient Intake" :
+            (POPULATION >= 150) ? "Below Average Patient Intake" :
+            (POPULATION >= 0) ? "Poor Patient Intake" :
+            "Negative Patient Intake";
+        }
+
+          function getCentersColor(POPULATION) {
+            return (POPULATION >= 650) ? "#800000" :  // Dark Red (Category 5)
+                (POPULATION >= 300) ? "#FF0000" :  // Red (Category 4)
+                (POPULATION >= 150) ? "#FF4500" :  // Orange-Red (Category 3)
+                (POPULATION >= 0)  ? "#FFA500" :  // Orange (Category 2)
+                "#00FF00";                       // Green (Tropical Depression)
+}
+
+
+
+//    var Centers = L.geoJSON(Centers, {  
+    // pointToLayer: function (feature, latlng) { 
+    // return L.marker(latlng, {icon: uncIcon});}}) 
+    // .bindPopup(customPopup)
+    // .addTo(map); 
+    
+var baseMaps = {
+    "Open Street Map": OSM,
+    "Panorama": Panorama
+};
+
+var overlayMaps = {
+    "Trauma Care Centers": Centers
+};
+
+var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    </script>
+    </body>
+</html>
