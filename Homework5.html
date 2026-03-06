@@ -1,0 +1,99 @@
+ <title>Homework5</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        <script src="./shark.js" ></script>
+    </head>
+    <body>
+        Historic Shark Attacks in California 
+    <div class="slidecontainer">
+        <input type="range" min="1" max="210" value="1" class="slider" id="myRange">
+         Date: <span id="demo"></span>
+    </div>
+
+    <div id="mapid"></div>
+    
+    <style>
+        #mapid{ position: relative;
+            width: 1500px; height: 700px; }
+
+             .slidecontainer {
+    width: 100%;
+    }
+
+    .slider {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 25px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    }
+
+    .slider:hover {
+    opacity: 5;
+    }
+
+    .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #0814be;
+    cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #266dd0;
+    cursor: pointer;
+    }
+    </style>
+    <script>  
+   
+    var map = L.map('mapid').setView([36.5, -122.47381444947317], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+  
+    var uncIcon = L.icon({   
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/10/10923.png',   
+      
+        iconSize: [50,50], 
+        popupAnchor: [0,0] 
+        });
+   
+
+    var sharks = L.geoJSON(shark.features[0], {  
+    pointToLayer: function (feature, latlng) { 
+    return L.marker(latlng, {icon: uncIcon});}}) 
+    .addTo(map); 
+    map.addLayer(sharks)
+
+    var slider = document.getElementById("myRange")
+    var output = document.getElementById("demo")
+
+    slider.oninput = function() {
+        output.innerHTML = shark.features[(this.value-1)].properties.Date; // get the date value and assign it to the text
+        map.removeLayer(sharks);// remove the hurricane layer otherwise it will keep adding more and more elements
+        sharks = L.geoJSON(shark.features.slice(0,this.value), // select the values from 0 to the slider input using the slice array method
+        {pointToLayer: function (feature, latlng) { 
+        return L.marker(latlng, {icon: uncIcon});}}); 
+        map.addLayer(sharks); 
+    }
+     window.onload = function() {
+            slider.value = 1;  
+     };
+    
+     
+    </script>
+    </body>
+</html>
