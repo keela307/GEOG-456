@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Project</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
+    <script src="wisteria.js"></script>
+</head>
+
+ <style>
+        #map {
+            width: 75%;
+            height: 550px;
+
+        }
+        body { background-color: lavenderblush;
+
+        }
+    </style>
+
+<body>
+    </br>
+
+<h3 id="theYearID">Year</h3>
+<input id="myRange" type="range" name="year" value="0" min="0" max="10" oninput="moveSlider(this.value)">
+<br>
+     <div id="map"></div>
+
+     <script>
+
+
+const first = [];
+const second = [];
+const third = [];
+const fourth = [];
+const fifth = [];
+const sixth = [];
+const seventh = [];
+const eigth = [];
+const ninth = [];
+const tenth = [];
+const eleventh = [];
+const initialLength =  wisteria.features.length; 
+
+
+ 
+for (let i = 0; i < initialLength; i++) { 
+  if (wisteria.features[i].properties.observed_on == 2015) first.push(wisteria.features[i]); // Add a new element
+  else if (wisteria.features[i].properties.observed_on == 2016) second.push(wisteria.features[i]);
+};
+  
+for (let i = 0; i < initialLength; i++) { 
+    if (wisteria.features[i].properties.observed_on == 2017) third.push(wisteria.features[i]) 
+};
+
+
+ function whichYear(date) {
+    return (wisteria.features[i].properties.observed_on == 2018) ? fourth.push(wisteria.features[i]):
+    (wisteria.features[i].properties.observed_on == 2019) ? fifth.push(wisteria.features[i]):
+    (wisteria.features[i].properties.observed_on == 2020) ? sixth.push(wisteria.features[i]):
+    (wisteria.features[i].properties.observed_on == 2021) ? seventh.push(wisteria.features[i]):
+    (wisteria.features[i].properties.observed_on == 2022) ? eigth.push(wisteria.features[i]):
+    (wisteria.features[i].properties.observed_on == 2023) ? ninth.push(wisteria.features[i]):
+     (wisteria.features[i].properties.observed_on == 2024) ? tenth.push(wisteria.features[i]):
+      eleventh.push(wisteria.features[i])
+};  
+
+    var map = L.map('map').setView([35.95, -78.9],7 );
+        
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+}).addTo(map);
+
+
+var nestIcon = L.icon({
+    iconUrl: 'birb.png',
+  
+
+    iconSize:     [38, 48], // size of the icon
+  
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+   
+});
+
+
+     var myData = [first, second, third, fourth, fifth, sixth, seventh, eigth, ninth, tenth, eleventh] // array ordering the data 
+     var order = ['2015','2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'] // an array with the date of each data source
+     var points = L.geoJSON(myData[0],{
+            pointToLayer: function(feature,latlng){
+                return L.marker(latlng, {icon: nestIcon})
+            }
+        }).addTo(map); // open the first element of the myData array
+
+    function moveSlider(value){  // function called by the slider, with the value parameter: the value goes from 0 to 2
+        var year = myData[value] // get the data based on the slider value
+        map.removeLayer(points);// leaflet method to remove a layer 
+        // point = L.geoJSON(year, {icon: nestIcon});
+        points = L.geoJSON(year);
+        map.addLayer(points); // add the new layer
+        document.getElementById('theYearID').innerHTML = order[value] // change the text above the slider
+    } moveSlider(0)
+    window.onload = function() {
+        document.getElementById('dateSlider').value = 0;  
+    };
+   
+
+
+</script>
+</body>
+</html>
