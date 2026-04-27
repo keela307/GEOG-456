@@ -1,0 +1,78 @@
+<htmL>
+    <title>Homework 6-1 Image Display</title>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+          /* Most CSS created using ChatGPT */
+          h1{
+            color: green;
+            width: 95vw;
+            height: 5%;
+            text-align: center;
+          }
+        body {
+
+          margin: 0; /* Remove default margin */
+          padding: 0; /* Remove default padding */
+          overflow-x: hidden; /* Prevent overflow: something you might want to have for maps on a cellphone screen */
+          background-color: black; /* Just for demonstration */
+          color: white;
+          
+        }
+        .row {
+          /* width: 600px;  */
+          width: 95vw;
+          background-color: rgb(28, 28, 28); /* Just for demonstration */
+          padding: 20px;
+          border: 1px solid black;
+          display: flex;
+        }
+
+        p {
+          padding-top: 1%;
+          padding-right: 5%;
+          padding-left: 5%;
+        }
+        
+        /* Creates two equal columns */
+        .column {
+          flex: 50%;
+          padding: 10px;
+          overflow: hidden; /* Prevent overflow */
+        }
+        </style>
+        </head>
+
+<body>
+    <h1>West Virginia Mine Reclamation Site From 2009-2020 </h1>
+    <div class="row">
+        <div class="column">
+          <img  src="./WV2009.png" alt="2009" style="width:100%">
+        </div>
+        <div class="column">
+            <img  src="./WV2016.png" alt="2016" style="width:100%">
+        </div>
+         <div class="column">
+            <img  src="./WV2020.png" alt="2020" style="width:100%">
+        </div>
+      </div>
+
+
+      
+<p>West Virginia is at the forefront of mine reclamation, an environmental movement started to help prevent the negative outcomes associated with coal mining. A federal law mandates that coal companies contribute to restoring the land after mining has conlcuded in order to maintain their land usage. These images show a mining site that was abandoned in the early 2000s, and the progress made to restore the land over the last decade. Most restoration focuses on diminishing acid mine drainage and soil erosion, which is evident by the concentration on planting tree and increasing the amount of green space as the images progress. Interestingly, though there is a focus on incerasing the number of plants, the roads are also better maintained as time goes on despite the mine being abandoned. This seems to me that there might be futher use of the land or that this site is a good path to use to get to another site nearby, making it important to keep the roads passable and organized.</p>
+      <script>
+
+        // This script was written by ChatGPT. It is commonly used to detect any changes in the browser size and readjust the sizes of elements on the screen.
+        // Set the width of .row to match the width of the screen
+  
+        // window.addEventListener('resize', function() {
+        //     var row = document.querySelector('.row');
+        //     row.style.width = window.innerWidth/1.05 + 'px';
+        //     // notice that I have divided the width by 1.05, I had to do this because for some reason the images kept extending the row div
+        // });
+
+        // // Trigger the resize event to initially set the width
+        // window.dispatchEvent(new Event('resize'));
+    
+    </script>
+</body>
