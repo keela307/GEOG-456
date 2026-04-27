@@ -25,7 +25,13 @@
         z-index: 1;
         opacity: 1;
     }
-    #after{
+   
+    #middle{
+        z-index: 2;
+        opacity: .5;
+    }
+
+    #current{
         z-index: 3;
         opacity: 0;
     }
@@ -59,19 +65,22 @@ p{
 <input type="range" id="year" name="year" list="tickmarks" value="0" oninput="myFunction(this.value)"/>
 <datalist id="tickmarks">
   <option value="0" label="Before"></option>
-  <option value="100" label="After"></option>
+  <option value="50" label="Middle"></option>
+  <option value="100" label="Current"></option>
 </datalist>
 
 
 <div id="image_container">
-        <img id="after"  src="./WV2020.png" alt="">
+        <img id="current"  src="./WV2020.png" alt="">
+        <img id="middle"  src="./WV2016.png" alt="">
         <img id="before" src="./WV2009.png" alt="">
 
     </div>
 <script>
     function myFunction(e) {
         console.log(e)
-        document.getElementById("after").style.opacity = e/100;
+        document.getElementById("middle").style.opacity = e/100;
+        document.getElementById("current").style.opacity = e/100;
     }
     </script>
 <p>West Virginia is at the forefront of mine reclamation, an environmental movement started to help prevent the negative outcomes associated with coal mining. A federal law mandates that coal companies contribute to restoring the land after mining has conlcuded in order to maintain their land usage. These images show a mining site that was abandoned in the early 2000s, and the progress made to restore the land over the last decade. Most restoration focuses on diminishing acid mine drainage and soil erosion, which is evident by the concentration on planting tree and increasing the amount of green space as the images progress. Interestingly, though there is a focus on incerasing the number of plants, the roads are also better maintained as time goes on despite the mine being abandoned. This seems to me that there might be futher use of the land or that this site is a good path to use to get to another site nearby, making it important to keep the roads passable and organized.</p>
